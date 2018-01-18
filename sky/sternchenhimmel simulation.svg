@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+    height="200mm" width="200mm" viewBox="-100 -100 200 200"
+    onload="start()"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Urs Fässler</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+
+  <script type="text/javascript">
+    <![CDATA[
+
+var IntervalMs = 9 * 1000;
+var FadeDuration = "3s";
+var OffColor = "#191900";
+var OnColor = "#ffff00";
+
+var animations = [];
+
+function start() {
+  var group = document.getElementById("lights");
+  var lights = group.getElementsByTagName("circle");
+
+
+  for (var i = 0; i < lights.length; i++) {
+    var animation = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+
+    animation.setAttribute("dur", FadeDuration);
+    animation.setAttribute("attributeName", "fill");
+    animation.setAttribute("fill", "freeze");
+    animation.setAttribute("to", OffColor);
+
+    lights[i].appendChild(animation);
+
+    animations.push(animation);
+  }
+
+  update();
+  setInterval(update, IntervalMs);
+}
+
+function update() {
+  for (var i = 0; i < animations.length; i++) {
+    var item = animations[i];
+    var value = Math.random() < 0.5;
+    var color = value ? OnColor : OffColor;
+
+    setColor(item, color);
+  }
+}
+
+function setColor(item, color) {
+  var oldColor = item.getAttribute("to");
+
+  item.setAttribute("from", oldColor);
+  item.setAttribute("to", color);
+
+  item.beginElement();
+}
+
+    ]]>
+  </script>
+
+  <circle cx="0" cy="0" r="90" fill="#000670"/>
+  <g id="lights" fill="#ffff00">
+    <circle cx="-71" cy="31" r="2.5"/>
+    <circle cx="-65" cy="-31" r="2.5"/>
+    <circle cx="-47" cy="5" r="2.5"/>
+    <circle cx="-33" cy="62" r="2.5"/>
+    <circle cx="-28" cy="-68" r="2.5"/>
+    <circle cx="-27" cy="-26" r="2.5"/>
+    <circle cx="-11" cy="3" r="2.5"/>
+    <circle cx="-10" cy="41" r="2.5"/>
+    <circle cx="5" cy="-50" r="2.5"/>
+    <circle cx="14" cy="67" r="2.5"/>
+    <circle cx="25" cy="-16" r="2.5"/>
+    <circle cx="26" cy="27" r="2.5"/>
+    <circle cx="36" cy="-60" r="2.5"/>
+    <circle cx="55" cy="6" r="2.5"/>
+    <circle cx="60" cy="44" r="2.5"/>
+    <circle cx="69" cy="-33" r="2.5"/>
+  </g>
+</svg>
